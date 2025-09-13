@@ -1,20 +1,45 @@
-# TODOs
-- [ ]  Visualizing the neural network weights over time?
-- [ ]  Compare the performance of the algorithm with different values of the learning rate
-- [ ]  Hyperparameter tuning (like adjusting the learning rate, batch size, and the epsilon-greedy exploration parameter) - grid search or random search?
-- [ ]  Consider adjusting the epsilon-greedy exploration parameter over episodes
-- [ ]  Use saved model or checkpoints at different stages of training
-- [ ]  Analyze the impact of the size or architecture of the neural network on performance
-- [ ]  Considering changing the batch size used during training
-- [ ]  Examine the effect of different reward structures on the learning process
-- [ ]  Observe the algorithm's performance in different initial conditions or starting states
-- [ ]  Comparing the performance with a different reinforcement learning algorithm
-- [ ]  Implement experience replay or prioritized experience replay
-- [ ]  Assess the impact of the discount factor
-- [ ]  Using a target network to stabilize the learning process
-- [ ]  Implement double Q-learning and compare its performance
-- [ ]  Consider using a different optimization algorithm, like RMSProp or SGD, instead of Adam
-- [ ]  Running the algorithm with different numbers of enemy sprites
-- [ ]  Evaluate the robustness of the trained agent to random perturbations in the game environment
-- [ ]  Using techniques like gradient clipping to stabilize training
-- [ ]  Implement and compare the performance with a different exploration strategy, such as softmax action selection
+## Installation
+
+This project uses Conda for environment management. TensorFlow is installed per-platform after creating the environment.
+
+Create and activate the Conda environment
+
+- Create the environment:
+  `conda env create -f environment.yml`
+- Activate it:
+  `conda activate rl-game`
+
+Run
+
+- Train (catch objects):
+  `python main.py --scenario eat --train --num-enemies 3 --enemy-speed 3`
+- Train (avoid collisions):
+  `python main.py --scenario avoid --train --num-enemies 3 --enemy-speed 6`
+- Evaluate a trained model (no exploration):
+  `python main.py --scenario eat --num-enemies 3 --enemy-speed 3`
+
+Visualize training
+
+- After training creates `plot/reward_history.pickle` and `plot/q_values.pickle`, run:
+  `python plot.py`
+
+## TODOs
+- [ ] Visualizing the neural network weights over time?
+- [ ] Compare the performance of the algorithm with different values of the learning rate
+- [ ] Hyperparameter tuning (like adjusting the learning rate, batch size, and the epsilon-greedy exploration parameter) - grid search or random search?
+- [ ] Consider adjusting the epsilon-greedy exploration parameter over episodes
+- [ ] Use saved model or checkpoints at different stages of training
+- [ ] Analyze the impact of the size or architecture of the neural network on performance
+- [ ] Considering changing the batch size used during training
+- [ ] Examine the effect of different reward structures on the learning process
+- [ ] Observe the algorithm's performance in different initial conditions or starting states
+- [ ] Comparing the performance with a different reinforcement learning algorithm
+- [ ] Implement experience replay or prioritized experience replay
+- [ ] Assess the impact of the discount factor
+- [ ] Using a target network to stabilize the learning process
+- [ ] Implement double Q-learning and compare its performance
+- [ ] Consider using a different optimization algorithm, like RMSProp or SGD, instead of Adam
+- [ ] Running the algorithm with different numbers of enemy sprites
+- [ ] Evaluate the robustness of the trained agent to random perturbations in the game environment
+- [ ] Using techniques like gradient clipping to stabilize training
+- [ ] Implement and compare the performance with a different exploration strategy, such as softmax action selection
