@@ -2,7 +2,7 @@
 RL GAME (Unified scenarios)
 Run examples:
   python main.py --scenario eat --train --num-enemies 3 --enemy-speed 3
-  python main.py --scenario avoid --train --num-enemies 3 --enemy-speed 6
+  python main.py --scenario avoid --train --num-enemies 6 --enemy-speed 15
 """
 import argparse
 import pickle
@@ -36,11 +36,24 @@ if __name__ == "__main__":
             # save the reward history and model every 10 episodes
             if t % 10 == 0:
                 # save the model
-                env.agent.model.save("model/model.h5")
-                # save the reward history
-                with open("plot/reward_history.pickle", "wb") as f:
-                    pickle.dump(reward_history, f)
-                # save the q_values
-                with open("plot/q_values.pickle", "wb") as f:
-                    pickle.dump(env.agent.q_values, f)
+                if args.scenario == "eat":
+                    env.agent.model.save("model/model_eat.h5")
+                elif args.scenario == "avoid":
+                    env.agent.model.save("model/model_avoid.h5")
+                print(f"Model saved for scenario: {args.scenario}")
+
+                if args.scenario == "eat":
+                    # save the reward history
+                    with open("plot/reward_history_eat.pickle", "wb") as f:
+                        pickle.dump(reward_history, f)
+                    # save the q_values
+                    with open("plot/q_values_eat.pickle", "wb") as f:
+                        pickle.dump(env.agent.q_values, f)
+                elif args.scenario == "avoid":
+                    # save the reward history
+                    with open("plot/reward_history_avoid.pickle", "wb") as f:
+                        pickle.dump(reward_history, f)
+                    # save the q_values
+                    with open("plot/q_values_avoid.pickle", "wb") as f:
+                        pickle.dump(env.agent.q_values, f)
         env.run()
