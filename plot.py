@@ -1,18 +1,46 @@
 # %%
+"""
+RL GAME plot
+Run examples:
+  python plot.py --scenario eat --episode 30 --num-enemies 3
+  python plot.py --scenario avoid --episodes 200 --num-enemies 6
+"""
+import argparse
+import os
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pickle
 import numpy as np
 from scipy.interpolate import griddata
 EPISODES = 2000
-# %% Read the data from pickle files
-# Open pickle file and load data
-with open("plot/reward_history.pickle", "rb") as f:
-    reward_history = pickle.load(f)
 
-# Open q_values pickle file and load data
-with open("plot/q_values.pickle", "rb") as f:
+# %% CLI args and file resolution
+parser = argparse.ArgumentParser(description="Plot training results for a scenario.")
+parser.add_argument("--scenario", choices=["eat", "avoid"], default="eat", help="Scenario to plot")
+parser.add_argument("--episodes", type=int, default=None, help="Episode window to plot (optional)")
+parser.add_argument("--num-enemies", type=int, default=3, help="Number of enemies to plot")
+args = parser.parse_args()
+
+def resolve_file(primary: str, fallback: str):
+    return primary if os.path.exists(primary) else fallback
+
+# Prefer scenario-specific files; fall back to legacy names if unavailable
+reward_path = resolve_file(
+    f"plot/reward_history_{args.scenario}.pickle", "plot/reward_history.pickle"
+)
+qvalues_path = resolve_file(
+    f"plot/q_values_{args.scenario}.pickle", "plot/q_values.pickle"
+)
+
+# %% Read the data from pickle files
+with open(reward_path, "rb") as f:
+    reward_history = pickle.load(f)
+with open(qvalues_path, "rb") as f:
     q_values = pickle.load(f)
+
+# Determine EPISODES window
+if args.episodes is not None:
+    EPISODES = args.episodes
 
 # %% Plot the reward history
 # 5 episode moving average
@@ -65,7 +93,7 @@ plt.show()
 
 # %% Plot the Q-value surface plot
 # Extracting state values
-for enemy_number in range(3):
+for enemy_number in range(args.num_enemies):
     q_values_action_3 = q_values_action_3[-EPISODES:]
     state_x_values = [item[(enemy_number * 2)] for item in state_values_list][-EPISODES:]
     state_y_values = [item[(enemy_number * 2) + 1] for item in state_values_list][-EPISODES:]
