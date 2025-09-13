@@ -44,7 +44,10 @@ class Env_enemy(pygame.sprite.Sprite):
 
         self.TRAIN = TRAIN  # Set to True if you want to train, otherwise False to just run the game
         if not self.TRAIN:
-            self.agent.load_model("model/model.h5")
+            if self.scenario == "eat":
+                self.agent.load_model("model/model_eat.h5")
+            elif self.scenario == "avoid":
+                self.agent.load_model("model/model_avoid.h5")
             self.agent.epsilon = 0  # Set exploration rate to 0 to always choose the best action
 
     def findDistance(self, a, b):
