@@ -10,7 +10,9 @@ import pickle
 import random
 import numpy as np
 import tensorflow as tf
-from Env import Env_enemy
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from environment.Env import Env_enemy
 
 
 def parse_args():

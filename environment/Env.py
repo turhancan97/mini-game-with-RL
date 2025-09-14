@@ -5,9 +5,12 @@ import numpy as np
 from collections import deque
 from skimage.color import rgb2gray
 from skimage.transform import resize
-from Player import Player
-from Enemy import Enemy
-from DQLAgent import DQLAgent, CNNDQLAgent
+from .Player import Player
+from .Enemy import Enemy
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from agent.DQLAgent import DQLAgent, CNNDQLAgent
 
 # window size
 WIDTH = 360
