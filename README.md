@@ -76,6 +76,22 @@ Models are saved every 10 episodes (by obs type and scenario):
 - Vector: `model/model_vector_eat.h5`, `model/model_vector_avoid.h5`
 - Pixels: `model/model_pixels_eat.h5`, `model/model_pixels_avoid.h5`
 
+## Pretrained Models
+
+Skip training and download pretrained weights from Hugging Face:
+
+- https://huggingface.co/turhancan97/mini-game-rl-models
+
+Place the downloaded files under the `model/` folder using these names:
+
+- Vector: `model/model_vector_eat.h5`, `model/model_vector_avoid.h5`
+- Pixels: `model/model_pixels_eat.h5`, `model/model_pixels_avoid.h5`
+
+Then run evaluation:
+
+- Vector: `python main.py --scenario eat --num-enemies 4`
+- Pixels: `python main.py --scenario eat --num-enemies 4 --obs-type pixels`
+
 ## Plot Training
 
 Analyze rewards and Q-values. For vector observations the script also produces state–Q heatmaps and 3D surfaces.
